@@ -10,6 +10,7 @@ using Uplift.DataAccess.Data.Repository.IRepository;
 using Uplift.DataAccess.Data.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Uplift.Utility;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Uplift
 {
@@ -28,7 +29,9 @@ namespace Uplift
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+
+            //(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
