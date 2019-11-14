@@ -43,7 +43,7 @@ namespace Uplift.DataAccess.Data.Repository
             {
                 foreach(var prop in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(prop);
+                    query = query.Include(prop);
                 }
             }
 
