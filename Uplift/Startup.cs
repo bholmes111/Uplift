@@ -11,6 +11,7 @@ using Uplift.DataAccess.Data.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Uplift.Utility;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace Uplift
 {
@@ -39,6 +40,13 @@ namespace Uplift
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();
 
@@ -66,6 +74,7 @@ namespace Uplift
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
 
             app.UseRouting();
 
